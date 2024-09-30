@@ -3,33 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Calculator</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="main1">
-        <input type="text" name="" id="inputbox">
+        <input type="text" id="inputbox" readonly>
         <div id="buttons">
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
+            <button onclick="add(1)">1</button>
+            <button onclick="add(2)">2</button>
+            <button onclick="add(3)">3</button>
+            <button onclick="add('+')">+</button>
         </div>
         <div id="buttons">
-            <button>4</button>
-            <button>5</button>
-            <button>6</button>
+            <button onclick="add(4)">4</button>
+            <button onclick="add(5)">5</button>
+            <button onclick="add(6)">6</button>
+            <button onclick="add('-')">-</button>
         </div>
         <div id="buttons">
-            <button>7</button>
-            <button>8</button>
-            <button>9</button>
+            <button onclick="add(7)">7</button>
+            <button onclick="add(8)">8</button>
+            <button onclick="add(9)">9</button>
+            <button onclick="add('*')">*</button>
         </div>
         <div id="buttons">
-            <button>7</button>
-            <button>8</button>
-            <button>9</button>
+            <button onclick="add(0)">0</button>
+            <button onclick="add('/')">/</button>
+            <button onclick="calculate()">=</button>
+            <button onclick="clearInput()">C</button>
         </div>
 
     </div>
+    <script>
+        let str = "";
+
+        function add(value) {
+            str += value;
+            document.getElementById("inputbox").value = str;
+        }
+
+        function calculate() {
+            try {
+                let result = eval(str);
+                document.getElementById("inputbox").value = result;
+                str = result.toString();  // Update the string with the result for further calculations
+            } catch {
+                document.getElementById("inputbox").value = "Error";
+                str = ""; // Clear on error
+            }
+        }
+
+        function clearInput() {
+            str = "";
+            document.getElementById("inputbox").value = "";
+        }
+    </script>
 </body>
 </html>
